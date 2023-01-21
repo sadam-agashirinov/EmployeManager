@@ -1,4 +1,5 @@
 ﻿using EmployeeManager.Application.Interfaces;
+using EmployeeManager.Domain.Entities;
 using MediatR;
 
 namespace EmployeeManager.Application.UseCases.Employee.Commands.CreateEmployee;
@@ -14,15 +15,22 @@ public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeComman
 
     public async Task<Guid> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var employee = new Domain.Entities.Employee()
+        var employeeId = Guid.NewGuid();
+        var departments = request.DepartmentsId.Select(departmentId => new EmployeeDepartment
         {
             Id = Guid.NewGuid(),
+            EmployeeId = employeeId,
+            DepartmentId = departmentId
+        }).ToList();
+        var employee = new Domain.Entities.Employee()
+        {
+            Id = employeeId,
             LastName = request.LastName,
             FirstName = request.FirstName,
             Patronymic = request.Patronymic,
             Email = request.Email,
             Salary = request.Salary,
-            EmployeeDepartmentIds = request.DepartmentsId
+            EmployeeDepartments = departments
         };
         
         await _dbContext.Employees.AddAsync(employee, cancellationToken);

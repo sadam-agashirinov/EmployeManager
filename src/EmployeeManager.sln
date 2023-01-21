@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManager.Domain", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManager.Application", "EmployeeManager.Application\EmployeeManager.Application.csproj", "{6B313484-1470-40B2-9B40-FE6DE9ED021F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManager.IntegrationTests", "EmployeeManager.IntegrationTests\EmployeeManager.IntegrationTests.csproj", "{E5643C4D-0696-4151-BFA6-469A22EC49D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,7 @@ Global
 		{8C723CD8-42C9-4D30-98CB-CE233B9BEF54} = {8B8408C5-15AE-47D8-8105-A62B02A0C1AF}
 		{5F7FB0E2-EE7F-4FE3-93CE-EB5AC758635B} = {1E755982-33F5-4E7D-8F1B-318A6528FF41}
 		{6B313484-1470-40B2-9B40-FE6DE9ED021F} = {1E755982-33F5-4E7D-8F1B-318A6528FF41}
+		{E5643C4D-0696-4151-BFA6-469A22EC49D5} = {03C586A3-5468-427A-9A69-F7FDDC322619}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8C723CD8-42C9-4D30-98CB-CE233B9BEF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -37,5 +40,9 @@ Global
 		{6B313484-1470-40B2-9B40-FE6DE9ED021F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B313484-1470-40B2-9B40-FE6DE9ED021F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B313484-1470-40B2-9B40-FE6DE9ED021F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5643C4D-0696-4151-BFA6-469A22EC49D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5643C4D-0696-4151-BFA6-469A22EC49D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5643C4D-0696-4151-BFA6-469A22EC49D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5643C4D-0696-4151-BFA6-469A22EC49D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
