@@ -43,44 +43,46 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 
     private void SeedData(EntityTypeBuilder<Department> builder)
     {
-        /*
-         * идентификаторы прописал статически чтобы знать что передавать в тестах
-         */
-        
-        var financeDepartment = new Department
-        {
-            Id = Guid.Parse("9ab46f93-6e3c-4e15-b79e-190e1105c33d"),
-            Name = "Финансовый",
-            ParentDepartmentId = null,
-            ParentDepartment = null
-        };
+        var financeDepartmentId = Guid.Parse("9ab46f93-6e3c-4e15-b79e-190e1105c33d");
 
         var departments = new[]
         {
             new Department
             {
+                Id = financeDepartmentId,
+                Name = "Финансовый",
+                ParentDepartmentId = null,
+                ParentDepartment = null,
+                EmployeeDepartmentId = null
+            },
+            new Department
+            {
                 Id = Guid.Parse("0fb37d5b-04bd-478a-841d-79f954be6528"),
                 Name = "Логистики",
-                ParentDepartmentId = financeDepartment.Id,
+                ParentDepartmentId = financeDepartmentId,
+                EmployeeDepartmentId = null
             },
             new Department
             {
                 Id = Guid.Parse("ede94df8-b101-452e-bddc-fe68431622ee"),
                 Name = "Закупок",
-                ParentDepartmentId = financeDepartment.Id,
+                ParentDepartmentId = financeDepartmentId,
+                EmployeeDepartmentId = null
             },
             new Department
             {
                 Id = Guid.Parse("61ce4735-4c00-414e-955d-1363d27a297f"),
                 Name = "Кадров",
-                ParentDepartmentId = financeDepartment.Id,
+                ParentDepartmentId = financeDepartmentId,
+                EmployeeDepartmentId = null
             },
             new Department
             {
                 Id = Guid.Parse("223a57cf-4650-4ec7-b39f-0970837d6769"),
                 Name = "Развлечений",
                 ParentDepartmentId = null,
-                ParentDepartment = null
+                ParentDepartment = null,
+                EmployeeDepartmentId = null
             }
         };
         
