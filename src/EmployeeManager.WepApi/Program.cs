@@ -1,5 +1,6 @@
 using EmployeeManager.Application;
 using EmployeeManager.Persistence;
+using EmployeeManager.WepApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
