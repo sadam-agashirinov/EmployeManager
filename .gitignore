@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+src/.idea/.idea.EmployeManager/.idea/.name
+src/.idea/.idea.EmployeManager/.idea/encodings.xml
+src/.idea/.idea.EmployeManager/.idea/indexLayout.xml
+src/.idea/.idea.EmployeManager/.idea/projectSettingsUpdater.xml
+src/.idea/.idea.EmployeManager/.idea/vcs.xml
+src/.idea/.idea.EmployeManager/.idea/workspace.xml
