@@ -17,6 +17,8 @@
             {
                 public const string Create = Base;
                 public const string Delete = Base + "/{id:Guid}";
+                public const string Update = Base + "/{id:Guid}";
+                
             }
         }
     }

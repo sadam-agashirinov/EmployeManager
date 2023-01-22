@@ -48,7 +48,8 @@ public class UpdateEmployeeCommandHandlerTest : BaseTest
         employeeFromDb.Email.Should().Be(updateEmployeeCommand.Email);
         employeeFromDb.Salary.Should().Be(updateEmployeeCommand.Salary);
         employeeFromDb.EmployeeDepartments.Count.Should().Be(updateEmployeeCommand.DepartmentsId.Count);
-        employeeFromDb.EmployeeDepartments.All(x => updateEmployeeCommand.DepartmentsId.Contains(x.DepartmentId));
+        employeeFromDb.EmployeeDepartments.All(x => updateEmployeeCommand.DepartmentsId.Contains(x.DepartmentId))
+            .Should().BeTrue();
     }
     
     private async Task<Guid> CreateEmployee()

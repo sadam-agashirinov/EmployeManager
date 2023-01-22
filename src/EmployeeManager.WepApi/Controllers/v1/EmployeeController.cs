@@ -1,5 +1,6 @@
 ﻿using EmployeeManager.Application.UseCases.Employee.Commands;
 using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
+using EmployeeManager.Application.UseCases.Employee.Commands.UpdateEmployee;
 using EmployeeManager.WepApi.Controllers.Common;
 using EmployeeManager.WepApi.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,13 @@ public class EmployeeController : BaseController
         return Ok(employeeId);
     }
 
+    /// <summary>
+    /// Удалить сотрудника
+    /// </summary>
+    /// <param name="id">идентификатор сотрудника</param>
+    /// <returns>Идентификатор удаленного сотрудника</returns>
+    /// <response code="201">Успешно</response>
+    /// <response code="400">Ошибка валидации данных</response>
     [HttpDelete(ApiRouters.V1.Employee.Delete)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -47,5 +55,32 @@ public class EmployeeController : BaseController
 
         var deletedEmployeeId = await Mediator.Send(deleteQuery);
         return Ok(deletedEmployeeId);
+    }
+
+    /// <summary>
+    /// Обновить данные сотрудника
+    /// </summary>
+    /// <param name="id">идентификатор сотрдуника</param>
+    /// <param name="requestData">обновленные данные</param>
+    /// <returns>идентификатор сотрудника</returns>
+    [HttpPut(ApiRouters.V1.Employee.Update)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto requestData)
+    {
+        var updateEmployeeCommand = new UpdateEmployeeCommand()
+        {
+            Id = id,
+            LastName = requestData.LastName,
+            FirstName = requestData.FirstName,
+            Patronymic = requestData.Patronymic,
+            Email = requestData.Email,
+            Salary = requestData.Salary,
+            DepartmentsId = requestData.DepartmentsId
+        };
+
+        var updatedEmployeeId = await Mediator.Send(updateEmployeeCommand);
+
+        return Ok(updatedEmployeeId);
     }
 }
