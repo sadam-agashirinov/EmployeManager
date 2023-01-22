@@ -30,6 +30,7 @@ public class UpdateEmployeeCommandHandlerTest : BaseTest
             DepartmentsId = new List<Guid>()
             {
                 Guid.Parse("0fb37d5b-04bd-478a-841d-79f954be6528"),
+                Guid.Parse("223a57cf-4650-4ec7-b39f-0970837d6769"),
                 Guid.Parse("ede94df8-b101-452e-bddc-fe68431622ee")
             }
         };
@@ -46,9 +47,8 @@ public class UpdateEmployeeCommandHandlerTest : BaseTest
         employeeFromDb.Patronymic.Should().Be(updateEmployeeCommand.Patronymic);
         employeeFromDb.Email.Should().Be(updateEmployeeCommand.Email);
         employeeFromDb.Salary.Should().Be(updateEmployeeCommand.Salary);
-        var except = employeeFromDb.EmployeeDepartments.Select(x => x.DepartmentId)
-            .Except(updateEmployeeCommand.DepartmentsId);
-        except.Count().Should().Be(0);
+        employeeFromDb.EmployeeDepartments.Count.Should().Be(updateEmployeeCommand.DepartmentsId.Count);
+        employeeFromDb.EmployeeDepartments.All(x => updateEmployeeCommand.DepartmentsId.Contains(x.DepartmentId));
     }
     
     private async Task<Guid> CreateEmployee()
