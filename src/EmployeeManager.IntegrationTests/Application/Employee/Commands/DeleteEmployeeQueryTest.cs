@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
+using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 using EmployeeManager.Domain.Entities;
 using EmployeeManager.IntegrationTests.Application.Common;
 using FluentAssertions;

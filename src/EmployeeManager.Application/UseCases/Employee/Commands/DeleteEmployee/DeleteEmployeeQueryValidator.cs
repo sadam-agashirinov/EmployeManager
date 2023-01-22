@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
+namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 
 public class DeleteEmployeeQueryValidator : AbstractValidator<DeleteEmployeeQuery>
 {
