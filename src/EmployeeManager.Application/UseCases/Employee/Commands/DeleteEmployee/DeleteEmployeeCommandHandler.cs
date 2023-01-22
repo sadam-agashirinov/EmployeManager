@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 
-public class DeleteEmployeeQueryHandler : IRequestHandler<DeleteEmployeeQuery, Guid>
+public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, Guid>
 {
     private readonly IAppDbContext _dbContext;
 
-    public DeleteEmployeeQueryHandler(IAppDbContext dbContext)
+    public DeleteEmployeeCommandHandler(IAppDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<Guid> Handle(DeleteEmployeeQuery request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employee =
             await _dbContext.Employees.SingleOrDefaultAsync(x => x.Id == request.Id,

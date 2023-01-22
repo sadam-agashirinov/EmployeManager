@@ -18,11 +18,11 @@ public class DeleteEmployeeQueryTest : BaseTest
     {
         //arrange
         var employeeId = await CreateEmployee();
-        var deleteEmployeeQuery = new DeleteEmployeeQuery
+        var deleteEmployeeQuery = new DeleteEmployeeCommand
         {
             Id = employeeId
         };
-        var sut = new DeleteEmployeeQueryHandler(AppDbContext);
+        var sut = new DeleteEmployeeCommandHandler(AppDbContext);
         
         //act
         var deletedEmployeeId = await sut.Handle(deleteEmployeeQuery, CancellationToken.None);

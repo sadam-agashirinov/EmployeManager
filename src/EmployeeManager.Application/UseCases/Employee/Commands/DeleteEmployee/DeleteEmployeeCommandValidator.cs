@@ -2,9 +2,9 @@
 
 namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 
-public class DeleteEmployeeQueryValidator : AbstractValidator<DeleteEmployeeQuery>
+public class DeleteEmployeeCommandValidator : AbstractValidator<DeleteEmployeeCommand>
 {
-    public DeleteEmployeeQueryValidator()
+    public DeleteEmployeeCommandValidator()
     {
         RuleFor(x => x.Id)
             .NotEqual(Guid.Empty)

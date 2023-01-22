@@ -40,7 +40,7 @@ public class EmployeeController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Guid>> DeleteEmployee(Guid id)
     {
-        var deleteQuery = new DeleteEmployeeQuery()
+        var deleteQuery = new DeleteEmployeeCommand()
         {
             Id = id
         };
