@@ -17,7 +17,7 @@ public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeComman
     public async Task<Guid> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
         var employee =
-            await _dbContext.Employees.SingleOrDefaultAsync(x => x.Id == request.Id,
+            await _dbContext.Employees.FirstOrDefaultAsync(x => x.Id == request.Id,
                 cancellationToken: cancellationToken);
         if (employee is null) throw new NotFoundException(nameof(Domain.Entities.Employee), request.Id);
 

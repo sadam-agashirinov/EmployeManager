@@ -12,7 +12,7 @@ using NUnit.Framework;
 
 namespace EmployeeManager.IntegrationTests.Application.Employee.Commands;
 
-public class CreateEmployeeHandlerTests : BaseTest
+public class CreateEmployeeCommandHandlerTests : BaseTest
 {
     [Test]
     public async Task ItShould_CreateEmployee_And_Return_EmployeeId()
@@ -37,7 +37,7 @@ public class CreateEmployeeHandlerTests : BaseTest
         var employeeId = await sut.Handle(employee, CancellationToken.None);
         
         //assert
-        var employeeFromDb = await AppDbContext.Employees.SingleOrDefaultAsync(x => x.Id == employeeId);
+        var employeeFromDb = await AppDbContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeId);
 
         employeeFromDb.Should().NotBeNull();
         employeeFromDb.Id.Should().Be(employeeId);

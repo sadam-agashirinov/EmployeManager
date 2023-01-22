@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 namespace EmployeeManager.IntegrationTests.Application.Employee.Commands;
 
-public class DeleteEmployeeQueryTest : BaseTest
+public class DeleteEmployeeCommandHandlerTest : BaseTest
 {
     [Test]
     public async Task ItShould_DeleteEmployee_And_Return_EmployeeId()
@@ -28,7 +28,7 @@ public class DeleteEmployeeQueryTest : BaseTest
         var deletedEmployeeId = await sut.Handle(deleteEmployeeQuery, CancellationToken.None);
         
         //assert
-        var employee = await AppDbContext.Employees.SingleOrDefaultAsync(x => x.Id == deletedEmployeeId);
+        var employee = await AppDbContext.Employees.FirstOrDefaultAsync(x => x.Id == deletedEmployeeId);
         employee.Should().BeNull();
     }
 

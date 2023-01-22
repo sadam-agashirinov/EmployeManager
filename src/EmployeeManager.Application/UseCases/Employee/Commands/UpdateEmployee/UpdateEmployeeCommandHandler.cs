@@ -20,7 +20,7 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         var employee = await _dbContext
             .Employees
             .Include(x => x.EmployeeDepartments)
-            .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
         if (employee is null) throw new NotFoundException(nameof(Domain.Entities.Employee), request.Id);
         
@@ -30,9 +30,26 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         employee.Email = request.Email;
         employee.Salary = request.Salary;
 
-        employee.EmployeeDepartments.ToList()
-            .RemoveAll(x => request.DepartmentsId.Contains(x.DepartmentId) == false);
-
+        foreach (var employeeDepartment in employee.EmployeeDepartments)
+        {
+            if (request.DepartmentsId.Contains(employeeDepartment.DepartmentId) == false)
+                _dbContext.EmployeeDepartments.Remove(employeeDepartment);
+        }
+        
+        foreach (var departmentId in request.DepartmentsId)
+        {
+            if (employee.EmployeeDepartments.FirstOrDefault(x => x.DepartmentId == departmentId) is null)
+            {
+                var employeeDepartment = new EmployeeDepartment()
+                {
+                    Id = Guid.NewGuid(),
+                    EmployeeId = employee.Id,
+                    DepartmentId = departmentId
+                };
+                await _dbContext.EmployeeDepartments.AddAsync(employeeDepartment, cancellationToken);
+            }
+        }
+        
         request.DepartmentsId.ForEach(departmentId =>
         {
             if (employee.EmployeeDepartments.ToList().Select(x => x.DepartmentId).Contains(departmentId) == false)
