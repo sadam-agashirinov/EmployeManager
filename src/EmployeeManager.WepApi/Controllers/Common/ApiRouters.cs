@@ -15,7 +15,8 @@
 
             public static class Employee
             {
-                public const string CreateEmployee = Base;
+                public const string Create = Base;
+                public const string Delete = Base + "/{id:Guid}";
             }
         }
     }
