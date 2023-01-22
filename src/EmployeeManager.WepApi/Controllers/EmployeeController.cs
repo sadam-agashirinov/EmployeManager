@@ -6,7 +6,7 @@ using EmployeeManager.WepApi.Dto.Common;
 using EmployeeManager.WepApi.Dto.Employee;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeManager.WepApi.Controllers.v1;
+namespace EmployeeManager.WepApi.Controllers;
 
 [ApiController]
 [Produces("application/json")]
@@ -19,7 +19,7 @@ public class EmployeeController : BaseController
     /// <returns>Идентификатор нового сотрудника</returns>
     /// <response code="201">Успешно</response>
     /// <response code="400">Ошибка валидации данных</response>
-    [HttpPost(ApiRouters.V1.Employee.Create)]
+    [HttpPost(ApiRouters.Employee.Create)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> CreateEmployee([FromBody] CreateEmployeeDto requestData)
@@ -44,7 +44,7 @@ public class EmployeeController : BaseController
     /// <returns>Идентификатор удаленного сотрудника</returns>
     /// <response code="201">Успешно</response>
     /// <response code="400">Ошибка валидации данных</response>
-    [HttpDelete(ApiRouters.V1.Employee.Delete)]
+    [HttpDelete(ApiRouters.Employee.Delete)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> DeleteEmployee(Guid id)
@@ -64,7 +64,7 @@ public class EmployeeController : BaseController
     /// <param name="id">идентификатор сотрдуника</param>
     /// <param name="requestData">обновленные данные</param>
     /// <returns>идентификатор сотрудника</returns>
-    [HttpPut(ApiRouters.V1.Employee.Update)]
+    [HttpPut(ApiRouters.Employee.Update)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto requestData)
