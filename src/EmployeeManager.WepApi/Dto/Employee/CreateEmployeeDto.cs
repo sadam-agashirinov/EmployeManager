@@ -1,4 +1,4 @@
-﻿namespace EmployeeManager.WepApi.Dto;
+﻿namespace EmployeeManager.WepApi.Dto.Employee;
 
 public class CreateEmployeeDto
 {

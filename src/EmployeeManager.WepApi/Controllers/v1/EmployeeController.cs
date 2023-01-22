@@ -2,7 +2,8 @@
 using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 using EmployeeManager.Application.UseCases.Employee.Commands.UpdateEmployee;
 using EmployeeManager.WepApi.Controllers.Common;
-using EmployeeManager.WepApi.Dto;
+using EmployeeManager.WepApi.Dto.Common;
+using EmployeeManager.WepApi.Dto.Employee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManager.WepApi.Controllers.v1;
@@ -20,7 +21,7 @@ public class EmployeeController : BaseController
     /// <response code="400">Ошибка валидации данных</response>
     [HttpPost(ApiRouters.V1.Employee.Create)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> CreateEmployee([FromBody] CreateEmployeeDto requestData)
     {
         var createCommand = new CreateEmployeeCommand()
@@ -45,7 +46,7 @@ public class EmployeeController : BaseController
     /// <response code="400">Ошибка валидации данных</response>
     [HttpDelete(ApiRouters.V1.Employee.Delete)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> DeleteEmployee(Guid id)
     {
         var deleteQuery = new DeleteEmployeeCommand()
@@ -65,7 +66,7 @@ public class EmployeeController : BaseController
     /// <returns>идентификатор сотрудника</returns>
     [HttpPut(ApiRouters.V1.Employee.Update)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto requestData)
     {
         var updateEmployeeCommand = new UpdateEmployeeCommand()
