@@ -36,7 +36,6 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception exception)
     {
-        //Log.Fatal(exception, "An error occurred while app initialization");
     }
 }
 
