@@ -1,5 +1,5 @@
 ﻿using EmployeeManager.Application.UseCases.Employee.Commands;
-using EmployeeManager.Application.UseCases.Employee.Queries.DeleteEmployeeQuery;
+using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
 using EmployeeManager.WepApi.Controllers.Common;
 using EmployeeManager.WepApi.Dto;
 using Microsoft.AspNetCore.Mvc;

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using EmployeeManager.Application.UseCases.Employee.Queries.DeleteEmployeeQuery;
+using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
 using EmployeeManager.Domain.Entities;
 using EmployeeManager.IntegrationTests.Application.Common;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
-namespace EmployeeManager.IntegrationTests.Application.Employee.Queries;
+namespace EmployeeManager.IntegrationTests.Application.Employee.Commands;
 
 public class DeleteEmployeeQueryTest : BaseTest
 {

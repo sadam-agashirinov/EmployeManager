@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace EmployeeManager.Application.UseCases.Employee.Queries.DeleteEmployeeQuery;
+namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
 
 public class DeleteEmployeeQuery : IRequest<Guid>
 {

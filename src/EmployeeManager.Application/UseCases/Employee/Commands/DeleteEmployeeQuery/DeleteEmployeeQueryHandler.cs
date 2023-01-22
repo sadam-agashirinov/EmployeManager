@@ -3,7 +3,7 @@ using EmployeeManager.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeManager.Application.UseCases.Employee.Queries.DeleteEmployeeQuery;
+namespace EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployeeQuery;
 
 public class DeleteEmployeeQueryHandler : IRequestHandler<DeleteEmployeeQuery, Guid>
 {
