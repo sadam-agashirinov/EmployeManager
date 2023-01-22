@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
+using EmployeeManager.Application.Common.Exceptions;
 using FluentValidation;
 
 namespace EmployeeManager.WepApi.Middleware;
@@ -32,6 +33,9 @@ class CustomExceptionHandlerMiddleware
             case ValidationException validationException:
                 code = HttpStatusCode.BadRequest;
                 result = JsonSerializer.Serialize(validationException.Errors);
+                break;
+            case NotFoundException:
+                code = HttpStatusCode.NotFound;
                 break;
         }
 
