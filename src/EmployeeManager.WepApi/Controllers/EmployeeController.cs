@@ -1,6 +1,7 @@
 ﻿using EmployeeManager.Application.UseCases.Employee.Commands;
 using EmployeeManager.Application.UseCases.Employee.Commands.DeleteEmployee;
 using EmployeeManager.Application.UseCases.Employee.Commands.UpdateEmployee;
+using EmployeeManager.Application.UseCases.Employee.Queries.GetEmployee;
 using EmployeeManager.WepApi.Controllers.Common;
 using EmployeeManager.WepApi.Dto.Common;
 using EmployeeManager.WepApi.Dto.Employee;
@@ -47,6 +48,7 @@ public class EmployeeController : BaseController
     [HttpDelete(ApiRouters.Employee.Delete)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Guid>> DeleteEmployee(Guid id)
     {
         var deleteQuery = new DeleteEmployeeCommand()
@@ -67,6 +69,7 @@ public class EmployeeController : BaseController
     [HttpPut(ApiRouters.Employee.Update)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto requestData)
     {
         var updateEmployeeCommand = new UpdateEmployeeCommand()
@@ -84,4 +87,26 @@ public class EmployeeController : BaseController
 
         return Ok(updatedEmployeeId);
     }
+
+    /// <summary>
+    /// Получить информацию о сотруднике
+    /// </summary>
+    /// <param name="id">идентификатор сотрдуника</param>
+    /// <returns>информация о сотруднике</returns>
+    [HttpGet(ApiRouters.Employee.Get)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> GetEmployee(Guid id)
+    {
+        var getEmployeeQuery = new GetEmployeeQuery()
+        {
+            Id = id
+        };
+
+        var employee = await Mediator.Send(getEmployeeQuery);
+
+        return Ok(employee);
+    }
+
 }

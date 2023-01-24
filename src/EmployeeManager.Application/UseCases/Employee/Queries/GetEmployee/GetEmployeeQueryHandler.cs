@@ -16,7 +16,7 @@ public class GetEmployeeQueryHandler : IRequestHandler<GetEmployeeQuery, Domain.
 
     public async Task<Domain.Entities.Employee> Handle(GetEmployeeQuery request, CancellationToken cancellationToken)
     {
-        var employee = await _dbContext.Employees
+        var employee = await _dbContext.Employees.AsNoTracking()
             .Include(x => x.EmployeeDepartments)
             .ThenInclude(x => x.Department)
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EmployeeManager.Application.UseCases.Employee.Queries.GetEmployee;
@@ -38,7 +39,7 @@ public class GetEmployeeQueryHandlerTests : BaseTest
         employeeFromDb.Salary.Should().Be(employee.Salary);
         foreach (var department in employee.EmployeeDepartments)
         {
-            employeeFromDb.EmployeeDepartments.Contains(department).Should().BeTrue();
+            employeeFromDb.EmployeeDepartments.FirstOrDefault(x => x.Id == department.Id).Should().NotBeNull();
         }
     }
     
