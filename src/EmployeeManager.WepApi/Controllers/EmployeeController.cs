@@ -23,7 +23,7 @@ public class EmployeeController : BaseController
     [HttpPost(ApiRouters.Employee.Create)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
-    public async Task<ActionResult<Guid>> CreateEmployee([FromBody] CreateEmployeeDto requestData)
+    public async Task<ActionResult<Guid>> CreateEmployee([FromBody] CreateEmployeeRequestDto requestData)
     {
         var createCommand = new CreateEmployeeCommand()
         {
@@ -70,7 +70,7 @@ public class EmployeeController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<ValidationError>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeDto requestData)
+    public async Task<ActionResult<Guid>> UpdateEmployee(Guid id, [FromBody] UpdateEmployeeRequestDto requestData)
     {
         var updateEmployeeCommand = new UpdateEmployeeCommand()
         {
@@ -106,7 +106,17 @@ public class EmployeeController : BaseController
 
         var employee = await Mediator.Send(getEmployeeQuery);
 
-        return Ok(employee);
+        var response = new GetEmployeeResponseDto()
+        {
+            LastName = employee.LastName,
+            FirstName = employee.FirstName,
+            Patronymic = employee.Patronymic,
+            Email = employee.Email,
+            Salary = employee.Salary,
+            DepartmentsId = employee.EmployeeDepartments.Select(x => x.DepartmentId).ToList()
+        };
+
+        return Ok(response);
     }
 
 }

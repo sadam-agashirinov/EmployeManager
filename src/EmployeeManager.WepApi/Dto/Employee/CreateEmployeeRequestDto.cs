@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManager.WepApi.Dto.Employee;
 
-public class UpdateEmployeeDto
+public class CreateEmployeeRequestDto
 {
     public string LastName { get; set; }
     public string FirstName { get; set; }
