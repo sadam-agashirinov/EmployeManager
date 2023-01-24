@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 using EmployeeManager.Application.UseCases.Employee.Commands.UpdateEmployee;
 using EmployeeManager.Domain.Entities;
 using EmployeeManager.IntegrationTests.Application.Common;
+using EmployeeManager.IntegrationTests.Application.Employee.Common;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace EmployeeManager.IntegrationTests.Application.Employee.Commands;
 
-public class UpdateEmployeeCommandHandlerTest : BaseTest
+public class UpdateEmployeeCommandHandlerTest : EmployeeBaseTest
 {
     [Test]
     public async Task ItShould_Update_Employee_And_Return_EmployeeId()
     {
         //arrange
-        var employeeId = await CreateEmployee();
+        var employee = await CreateEmployee();
         var updateEmployeeCommand = new UpdateEmployeeCommand()
         {
-            Id = employeeId,
+            Id = employee.Id,
             LastName = "NewLastname",
             FirstName = "NewFirstname",
             Patronymic = "NewPatronymic",
@@ -50,38 +51,5 @@ public class UpdateEmployeeCommandHandlerTest : BaseTest
         employeeFromDb.EmployeeDepartments.Count.Should().Be(updateEmployeeCommand.DepartmentsId.Count);
         employeeFromDb.EmployeeDepartments.All(x => updateEmployeeCommand.DepartmentsId.Contains(x.DepartmentId))
             .Should().BeTrue();
-    }
-    
-    private async Task<Guid> CreateEmployee()
-    {
-        var employeeId = Guid.NewGuid();
-        var employee = new Domain.Entities.Employee
-        {
-            Id = employeeId,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            Patronymic = "Patronymic",
-            Email = "email@mail.com",
-            Salary = 1000,
-            EmployeeDepartments = new List<EmployeeDepartment>()
-            {
-                new()
-                {
-                    Id = Guid.NewGuid(),
-                    EmployeeId = employeeId,
-                    DepartmentId = Guid.Parse("9ab46f93-6e3c-4e15-b79e-190e1105c33d")
-                },
-                new()
-                {
-                    Id = Guid.NewGuid(),
-                    EmployeeId = employeeId,
-                    DepartmentId = Guid.Parse("0fb37d5b-04bd-478a-841d-79f954be6528")
-                }
-            }
-        };
-        await AppDbContext.Employees.AddAsync(employee);
-        await AppDbContext.SaveChangesAsync();
-
-        return employee.Id;
     }
 }

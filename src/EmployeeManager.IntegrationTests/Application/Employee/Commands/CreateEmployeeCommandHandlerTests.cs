@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using EmployeeManager.Application.UseCases.Employee.Commands;
 using EmployeeManager.Application.UseCases.Employee.Commands.CreateEmployee;
 using EmployeeManager.IntegrationTests.Application.Common;
+using EmployeeManager.IntegrationTests.Application.Employee.Common;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace EmployeeManager.IntegrationTests.Application.Employee.Commands;
 
-public class CreateEmployeeCommandHandlerTests : BaseTest
+public class CreateEmployeeCommandHandlerTests : EmployeeBaseTest
 {
     [Test]
     public async Task ItShould_CreateEmployee_And_Return_EmployeeId()
